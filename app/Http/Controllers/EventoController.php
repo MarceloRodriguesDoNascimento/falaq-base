@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
  
 namespace App\Http\Controllers;
  
@@ -64,10 +65,35 @@ class EventoController extends Controller
             ->orderByDesc('votos_count')
             ->orderByDesc('created_at')
             ->paginate(10);
+=======
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\EventoFormRequest;
+use App\Models\Evento;
+use App\Models\Pergunta;
+use App\Http\Requests\StorePerguntaRequest;
+use Illuminate\Support\Facades\Auth;
+
+class EventoController extends Controller
+{
+    public function index()
+    {
+        $eventos = Evento::all();
+        return view('eventos.index', compact('eventos'));
+    }
+
+    public function show($id)
+    {
+        $evento = Evento::find($id);
+
+        $perguntas = Pergunta::all();
+>>>>>>> 2040cdaf2bedf48eacfc0dada965c0bb7f99f175
 
         return view('eventos.show', compact('evento', 'perguntas'));
     }
 
+<<<<<<< HEAD
     public function votar(Pergunta $pergunta)
     {
         $pergunta->votos()->toggle(auth()->id());
@@ -85,5 +111,30 @@ class EventoController extends Controller
         return redirect()
             ->route('eventos.show', $eventoId)
             ->with('sucesso', 'Pergunta excluída com sucesso.');
+=======
+ 
+    public function storePergunta(StorePerguntaRequest $request, $id)
+    {
+        $evento = Evento::findOrFail($id);
+
+        Pergunta::create([
+            'evento_id' => $evento->id,
+            'user_id' => Auth::user()->id,
+            'texto'     => $request->input('texto'),
+            'status'    => 'pendente',
+        ]);
+
+        return redirect()->route('eventos.show', $evento->id)
+            ->with('sucesso', 'Sua pergunta foi enviada com sucesso!');
+    }
+
+    public function create(){
+        return view('eventos.create');
+    }
+
+    public function store(EventoFormRequest $request){
+        $evento = $request->user()->eventos()->create($request->validated());
+        return redirect()->route('eventos.show', $evento->id);
+>>>>>>> 2040cdaf2bedf48eacfc0dada965c0bb7f99f175
     }
 }

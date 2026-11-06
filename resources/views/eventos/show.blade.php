@@ -39,11 +39,15 @@
             <div class="card mb-3 shadow-sm border-start border-4 border-primary">
                 <div class="card-body">
                     <p class="fs-5 mb-2 text-white">{{ $pergunta->texto }}</p>
+<<<<<<< HEAD
                     <p class="mb-2 text-secondary small">{{ $pergunta->user->name ?? 'Anônimo' }}</p>
+=======
+>>>>>>> 2040cdaf2bedf48eacfc0dada965c0bb7f99f175
                     <div class="d-flex justify-content-between align-items-center text-secondary small">
                         <span>Status: <span class="badge bg-success">{{ $pergunta->status }}</span></span>
                         <span>{{ $pergunta->created_at->format('d/m/Y H:i') }}</span>
                     </div>
+<<<<<<< HEAD
                     <div class="d-flex align-items-center gap-2 mt-3">
                         <span class="text-secondary small">
                             {{ $pergunta->votos_count }} {{ $pergunta->votos_count === 1 ? 'voto' : 'votos' }}
@@ -92,6 +96,8 @@
                             <x-danger-button>Excluir pergunta</x-danger-button>
                         </form>
                     @endcan
+=======
+>>>>>>> 2040cdaf2bedf48eacfc0dada965c0bb7f99f175
                 </div>
             </div>
         @empty
@@ -102,11 +108,20 @@
 
         <!-- TICKET #002: Renderização dos Botões de Paginação -->
         @if(method_exists($perguntas, 'links'))
+<<<<<<< HEAD
             {{-- Abaixo da lista de perguntas --}}
             <div class="mt-6">
                 {{ $perguntas->links() }}
+=======
+            <div class="d-flex justify-content-center mt-4">
+                
+>>>>>>> 2040cdaf2bedf48eacfc0dada965c0bb7f99f175
             </div>
         @endif
     </div>
 </div>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> 2040cdaf2bedf48eacfc0dada965c0bb7f99f175
